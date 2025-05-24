@@ -1,6 +1,6 @@
-# SafeAlive
+# SiteAlive
 
-SafeAlive is a platform to check whether a website is up or down.
+SiteAlive is a platform to check whether a website is up or down.
 
 ## Backend Setup
 
