@@ -3,16 +3,21 @@ const mongoose = require('mongoose');
 const query_schema = new mongoose.Schema({
     username : {
         type : String,
-        default : "Anonmous"
+        default : "Anonymous"
     },
-    domain : {
+    url : {
         type : String
     },
-    curl_resposne : {
-        type : String
+    d_servers_response : {
+        type: [Object],
     },
-    response_to_client : {
-        type : String
+    d_servers_count : {
+        type : Number,
+        default : 0
+    },
+    url_reachable : {
+        type : Number,
+        default : 0
     }
 })
 
