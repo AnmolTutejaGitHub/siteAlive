@@ -4,18 +4,18 @@ const app = express();
 const cors = require('cors');
 const { exec } = require('child_process');
 
-const PORT = process.env.PORT || 9191;
+const PORT = process.env.PORT || 9000;
 
 app.use(cors({
-    origin: `http://localhost:8080`,
+    origin: `http://main-server:8080`,
     credentials: true
 }));
 
 app.use(express.json());
 
-app.get("/ping/:url",async(req,res)=>{
-    const url = req.params.url;
-    exec(`curl -s -o /dev/null -w "%{http_code}" ${url}`, (error, stdout, stderr) => {
+app.get("/ping",async(req,res)=>{
+    const url = req.query.url;
+    exec(`curl -A "Mozilla/5.0" -s -o /dev/null -w "%{http_code}" ${url}`, (error, stdout, stderr) => {
         if (error) {
           return res.status(400).send({ up: false, error: error.message });
         }
@@ -23,12 +23,11 @@ app.get("/ping/:url",async(req,res)=>{
         const statusCode = parseInt(stdout, 10);
       
         if (statusCode >= 200 && statusCode < 400) {
-          return res.status(200).send({ up: true });
+          return res.status(200).send({ up: true ,statusCode});
         } else {
           return res.status(200).send({ up: false, statusCode });
         }
       });
-    return res.status(500).send({message : 'some error occurrred'});
 })
 
 app.listen(PORT,()=>{

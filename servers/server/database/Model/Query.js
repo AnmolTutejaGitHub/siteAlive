@@ -18,6 +18,21 @@ const query_schema = new mongoose.Schema({
     url_reachable : {
         type : Number,
         default : 0
+    },
+    url_notreachable : {
+        type : Number,
+        default : 0
+    },
+    reachable : {
+        type :Boolean,
+    },
+    timestamp : {
+        type : Date,
+        default : Date.now,
+        immutable : true
+    },
+    domain : {
+        type : String,
     }
 })
 

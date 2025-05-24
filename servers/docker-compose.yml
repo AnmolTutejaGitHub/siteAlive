@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  main-server:
+    build:
+      context: ./server
+    ports:
+      - "8080:8080"
+    depends_on:
+      - d1
+      - d2
+      - d3
+    networks:
+      - internal
+
+  d1:
+    build:
+      context: ./d_server
+    ports:
+      - "9001:9001"
+    environment:
+      - PORT=9001
+    networks:
+      - internal
+
+  d2:
+    build:
+      context: ./d_server
+    ports:
+      - "9002:9002"
+    environment:
+      - PORT=9002
+    networks:
+      - internal
+
+  d3:
+    build:
+      context: ./d_server
+    ports:
+      - "9003:9003"
+    environment:
+      - PORT=9003
+    networks:
+      - internal
+
+networks:
+  internal:

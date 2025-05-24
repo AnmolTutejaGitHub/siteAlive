@@ -1,6 +1,7 @@
 import SearchBar from "./SearchBar";
 import Navbar from './Navbar';
 import TopResult from "./TopResult";
+import Footer from "./Footer";
 
 function Home(){
     return(
@@ -8,6 +9,7 @@ function Home(){
             <Navbar/>
             <SearchBar/>
             <TopResult/>
+            <Footer/>
         </div>
     );
 }

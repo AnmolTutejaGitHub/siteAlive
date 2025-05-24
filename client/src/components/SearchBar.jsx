@@ -1,11 +1,24 @@
 import { useState } from "react";
 import axios from "axios";
+import toast from 'react-hot-toast';
+
 function SearchBar() {
     const [url,setUrl] = useState('');
 
     async function ping(){
-        const response = await axios.get(`http://localhost:8080/check/${url}`);
+        const toastId = toast.loading('Posting...');
+        try{
+        const response = await axios.get(`http://localhost:8080/check?url=${encodeURIComponent(url)}`);
+        if(response.data.status.reachable) toast.success(`${url} is up`);
+        else toast.success(`${url} is down !`)
+        }catch(err){
+            toast.error('some error occurred');
+            toast.dismiss(toastId);
+        }finally{
+            toast.dismiss(toastId);
+        }
     }
+
     return (
       <div className="h-100 flex items-center flex-col  bg-[#B3C100] justify-center">
         <div className="py-4 pb-8 px-2 text-white flex justify-center flex-col items-center gap-2">
