@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function TopResult() {
   const [results, setResults] = useState([]);
   const [reload,setReload] = useState(false);
+  const navigate = useNavigate();
 
   async function getRecentResults() {
     try {
@@ -22,7 +24,8 @@ function TopResult() {
     return results.map((result, index) => (
           <div
             key={index}
-            className="p-6 bg-white rounded-2xl shadow-md border border-gray-200"
+            className="p-6 bg-white rounded-2xl shadow-md border border-gray-200 cursor-pointer"
+            onClick={()=>navigate(`/chart/${result._id}`) }
           >
   
             <div className="text-gray-700">
@@ -75,7 +78,7 @@ function TopResult() {
         <div>
            <button className="bg-white rounded-sm shadow-md border border-gray-200 p-2 ml-4 cursor-pointer" onClick={()=>setReload(!reload)}>refresh</button>
         </div>
-      <div className="flex flex-wrap flex-row p-4 gap-4 w-full">{renderResult()}</div>
+      <div className="flex flex-wrap flex-row p-4 gap-12 w-full justify-between">{renderResult()}</div>
       {results.length==0 && <div className="flex justify-center items-center">
             <div className="p-6 bg-white rounded-2xl shadow-md border border-gray-200 w-[80%] h-40 flex justify-center items-center text-xl">
                 No Recent Searches

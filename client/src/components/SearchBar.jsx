@@ -14,6 +14,7 @@ function SearchBar() {
         }catch(err){
             toast.error('some error occurred');
             toast.dismiss(toastId);
+            console.log(err);
         }finally{
             toast.dismiss(toastId);
         }

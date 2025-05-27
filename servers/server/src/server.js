@@ -72,6 +72,17 @@ app.get("/check", async(req, res) => {
     }
   });
 
+  app.get("/query/:id",async(req,res)=>{
+    try{
+        const {id} = req.params;
+        const query = await Query.findById(id);
+        res.status(200).send(query);
+    }catch(err){
+        console.log(err);
+        res.status(400).send({error : err});
+    }
+  })
+
 
 app.listen(PORT,()=>{
     console.log(`server is listening on port ${PORT}`);
